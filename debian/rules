@@ -1,4 +1,29 @@
 #!/usr/bin/make -f
+# See debhelper(7) (uncomment to enable)
+# output every command that modifies files on the build system.
+#export DH_VERBOSE = 1
+
+export PYBUILD_NAME=pyocd
+
+# Prevent setuptools/distribute from accessing the internet.
+export http_proxy = http://127.0.9.1:9
+
 
 %:
-	dh $@
+	dh $@ --buildsystem=pybuild
+
+override_dh_auto_build:
+	python3 setup.py build
+	rst2man debian/pyocd-gdbserver.rst > debian/pyocd-gdbserver.1
+	rst2man debian/pyocd-tool.rst > debian/pyocd-tool.1
+	rst2man debian/pyocd-flashtool.rst > debian/pyocd-flashtool.1
+
+override_dh_auto_install:
+	python3 setup.py install --root=$(CURDIR)/debian/python3-pyocd/ --install-layout=deb
+	echo "version = '0.13.1'" > $(CURDIR)/debian/python3-pyocd/usr/lib/python3/dist-packages/pyocd/_version.py
+	dh_installman -ppython3-pyocd debian/pyocd-gdbserver.1
+	dh_installman -ppython3-pyocd debian/pyocd-tool.1
+	dh_installman -ppython3-pyocd debian/pyocd-flashtool.1
+
+execute_after_dh_auto_clean:
+	${RM} -r .eggs pyocd/_version.py

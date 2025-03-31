@@ -1,0 +1,4 @@
+lost-egg
+replace-libusb_package-by-usb
+disable-jlink-plugin
+crlf.patch

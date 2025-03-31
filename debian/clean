@@ -1,0 +1,3 @@
+.pybuild/
+build/
+pyocd/debug/svd/svd_data.zip

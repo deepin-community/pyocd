@@ -1,15 +1,28 @@
-Source: template-repository
-Section: unknown
+Source: pyocd
+Section: embedded
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Maintainer: Jakob Haufe <sur5r@debian.org>
+Build-Depends:
+ debhelper-compat (= 13),
+ dh-sequence-python3,
+ python3,
+ python3-docutils,
+ python3-setuptools,
+ python3-usb
+Standards-Version: 4.2.1
+Homepage: https://github.com/mbedmicro/pyOCD
+Vcs-Git: https://salsa.debian.org/debian/pyocd.git
+Vcs-Browser: https://salsa.debian.org/debian/pyocd
 
-Package: template-repository
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Package: python3-pyocd
+Architecture: all
+Depends:
+ python3-usb (>= 1.0.0~),
+ ${misc:Depends},
+ ${python3:Depends}
+Description: ARM Cortex-M programming tools (Python3)
+ pyOCD is an Open Source Python based library for programming
+ and debugging ARM Cortex-M microcontrollers using CMSIS-DAP.
+ .
+ Includes support for flashing new binaries, resetting the device,
+ halt, step, resume read/write memory and set/remove breakpoints.

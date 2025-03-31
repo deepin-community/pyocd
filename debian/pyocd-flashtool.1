@@ -1,0 +1,161 @@
+.\" Man page generated from reStructuredText.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "" ""1"" "" "0.12.0"
+.SH NAME
+pyocd-flashtool \- ARM Cortex-M programming tool
+.SH DESCRIPTION
+.sp
+\fBpyocd\-flashtool\fP is an ARM Cortex\-M programming tool
+.SS Summary
+.sp
+pyOCD is an Open Source python based library for programming
+and debugging ARM Cortex\-M microcontrollers using CMSIS\-DAP.
+.sp
+Includes support for flashing new binaries, resetting the device,
+halt, step, resume read/write memory and set/remove breakpoints.
+.SS Support
+.sp
+Firmware files included in the upstream source are NOT included in the
+Debian package due to a lack of source code. Target files can be
+downloaded separately from  <https://github.com/mbedmicro/pyOCD/tree/master/binaries> 
+.sp
+Available targets for use with \-\-target option: lpc824, kinetis, w7500,
+kv11z7, lpc4088qsb, kv10z7, k20d50m, ncs36510, kl28z, kl25z, k82f25615,
+k28f15, maxwsnenv, max32600mbed, k22fa12, lpc4088, lpc4330, ke18f16, kl46z,
+stm32f103rc, kl82z7, lpc54114, kl43z4, kl26z, lpc11xx_32, lpc800, rtl8195am,
+kl05z, lpc1768, kw41z4, lpc4088dm, stm32f051, cortex_m, lpc11u24, kl02z,
+kw01z4, k64f, k22f, ke15z7, nrf51, nrf52, kl27z4, kw40z4, k66f18
+.SS Usage
+.INDENT 0.0
+.TP
+.B usage: pyocd\-flashtool [\-h] [\-\-version] [\-b BOARD_ID] [\-l] [\-d LEVEL] [\-t TARGET] [\-f FREQUENCY] [\-ce | \-se] [\-u]
+[\-a ADDRESS] [\-n COUNT] [\-s SKIP] [\-hp] [\-fp] [\-da DAPARG [DAPARG ...]] [\-\-mass\-erase]
+[file] [{bin,hex}]
+.UNINDENT
+.sp
+Flash utility
+.INDENT 0.0
+.TP
+.B positional arguments:
+file                  File to program
+{bin,hex}             File format. Default is to use the file extension
+.IP "System Message: ERROR/3 (debian/pyocd-flashtool.rst:, line 47)"
+Unexpected indentation.
+.INDENT 7.0
+.INDENT 3.5
+(.bin or .hex)
+.UNINDENT
+.UNINDENT
+.TP
+.B optional arguments:
+.INDENT 7.0
+.TP
+.B  \-h\fP,\fB  \-\-help
+show this help message and exit
+.TP
+.B  \-\-version
+show program\(aqs version number and exit
+.TP
+.BI \-b \ BOARD_ID\fR,\fB \ \-\-board \ BOARD_ID
+Connect to board by board id. Use \-l to list all
+connected boards.
+.TP
+.B  \-l\fP,\fB  \-\-list
+List all connected boards.
+.TP
+.BI \-d \ LEVEL\fR,\fB \ \-\-debug \ LEVEL
+Set the level of system logging output. Supported
+choices are: debug, info, warning, critical, error
+.TP
+.BI \-t \ TARGET\fR,\fB \ \-\-target \ TARGET
+Override target to debug. Supported targets are:
+lpc824, kinetis, w7500, kv11z7, lpc4088qsb, kv10z7,
+k20d50m, ncs36510, kl28z, kl25z, k82f25615, k28f15,
+maxwsnenv, max32600mbed, k22fa12, lpc4088, lpc4330,
+ke18f16, kl46z, stm32f103rc, kl82z7, lpc54114, kl43z4,
+kl26z, lpc11xx_32, lpc800, rtl8195am, kl05z, lpc1768,
+kw41z4, lpc4088dm, stm32f051, lpc11u24, kl02z, kw01z4,
+k64f, k22f, ke15z7, nrf51, nrf52, kl27z4, kw40z4,
+k66f18
+.TP
+.BI \-f \ FREQUENCY\fR,\fB \ \-\-frequency \ FREQUENCY
+Set the SWD clock frequency in Hz.
+.TP
+.BI \-c\fB e\fR,\fB \ \-\-chip_erase
+Use chip erase when programming.
+.TP
+.BI \-s\fB e\fR,\fB \ \-\-sector_erase
+Use sector erase when programming.
+.TP
+.B  \-u\fP,\fB  \-\-unlock
+Unlock the device.
+.TP
+.BI \-a \ ADDRESS\fR,\fB \ \-\-address \ ADDRESS
+Address. Used for the sector address with sector
+erase, and for the address where to flash a binary.
+.TP
+.BI \-n \ COUNT\fR,\fB \ \-\-count \ COUNT
+Number of sectors to erase. Only applies to sector
+erase. Default is 1.
+.TP
+.BI \-s \ SKIP\fR,\fB \ \-\-skip \ SKIP
+Skip programming the first N bytes. This can only be
+used with binary files
+.TP
+.BI \-h\fB p\fR,\fB \ \-\-hide_progress
+Don\(aqt display programming progress.
+.TP
+.BI \-f\fB p\fR,\fB \ \-\-fast_program
+Use only the CRC of each page to determine if it
+already has the same data.
+.UNINDENT
+.INDENT 7.0
+.TP
+.B \-da DAPARG [DAPARG ...], \-\-daparg DAPARG [DAPARG ...]
+Send setting to DAPAccess layer.
+.UNINDENT
+.INDENT 7.0
+.TP
+.B  \-\-mass\-erase
+Mass erase the target device.
+.UNINDENT
+.UNINDENT
+.sp
+\-\-chip_erase and \-\-sector_erase can be used alone as individual commands, or
+they can be used in conjunction with flashing a binary or hex file. For the
+former, only the erase option will be performed. With a file, the erase
+options specify whether to erase the entire chip before flashing the file, or
+just to erase only those sectors occupied by the file. For a standalone sector
+erase, the \-\-address and \-\-count options are used to specify the start address
+of the sector to erase and the number of sectors to erase.
+.SH COPYRIGHT
+2006-2013 ARM Limited
+.\" Generated by docutils manpage writer.
+.

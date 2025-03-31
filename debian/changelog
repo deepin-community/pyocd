@@ -1,5 +1,81 @@
-template-repository (1.0-1) unstable; urgency=medium
+pyocd (0.36.0-2.1) unstable; urgency=medium
 
-  * Initial release
+  * Non-maintainer upload.
+  * Remove runtime dependenct on python3-pkg-resources (Closes: #1083580)
+  * Clean better (Closes: #1046820)
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Alexandre Detiste <tchet@debian.org>  Wed, 05 Feb 2025 22:09:36 +0100
+
+pyocd (0.36.0-2) unstable; urgency=medium
+
+  [ Alexandre Detiste ]
+  Trim trailing whitespace.
+  Bump debhelper from old 11 to 13.
+  Set debhelper-compat version in Build-Depends.
+
+  [ Jakob Haufe ]
+  * Adopt package (Closes: #976075)
+  * Replace libusb_package by usb
+  * Disable jlink entry point (Closes: #1062953)
+  * Update d/copyright
+
+ -- Jakob Haufe <sur5r@debian.org>  Wed, 20 Mar 2024 10:57:26 +0100
+
+pyocd (0.36.0-1) unstable; urgency=medium
+
+  * QA upload.
+  * New upstream version 0.36.0 (Closes: #917515)
+  * add watch file
+  * remove extraneous build-dependency on setuptools-scm-git-archive
+    (Closes: #1050099)
+
+ -- Alexandre Detiste <tchet@debian.org>  Wed, 20 Dec 2023 03:55:12 +0100
+
+pyocd (0.13.1+dfsg-3) unstable; urgency=medium
+
+  * QA upload.
+  * Backport upstream fixes for recent Python. (Closes: #1034399)
+
+ -- Adrian Bunk <bunk@debian.org>  Mon, 22 May 2023 22:35:39 +0300
+
+pyocd (0.13.1+dfsg-2) unstable; urgency=medium
+
+  * QA upload.
+  * Move to Salsa and QA group as maintainer.
+  * Add Salsa CI
+
+ -- Neil Williams <codehelp@debian.org>  Sat, 16 Oct 2021 19:25:34 +0100
+
+pyocd (0.13.1+dfsg-1.1) unstable; urgency=medium
+
+  * Non maintainer upload by the Reproducible Builds team.
+  * No source change upload to rebuild on buildd with .buildinfo files.
+
+ -- Holger Levsen <holger@debian.org>  Tue, 05 Jan 2021 23:22:46 +0100
+
+pyocd (0.13.1+dfsg-1) unstable; urgency=medium
+
+  * New upstream release
+  * Includes fixes for the renamed module
+
+ -- Neil Williams <codehelp@debian.org>  Fri, 16 Nov 2018 09:57:30 +0000
+
+pyocd (0.12.0+dfsg-3) unstable; urgency=medium
+
+   * Add a temporary symlink until the next upstream release with
+     the module renamed. (Closes: #911840)
+
+ -- Neil Williams <codehelp@debian.org>  Thu, 25 Oct 2018 15:55:16 +0100
+
+pyocd (0.12.0+dfsg-2) unstable; urgency=medium
+
+  * Use pybuild
+
+ -- Neil Williams <codehelp@debian.org>  Tue, 09 Oct 2018 15:25:26 +0100
+
+pyocd (0.12.0+dfsg-1) unstable; urgency=medium
+
+  * Initial release. (Closes: #910566: ITP: pyocd -- ARM Cortex-M
+    programming tools (Python3))
+
+ -- Neil Williams <codehelp@debian.org>  Fri, 05 Oct 2018 09:50:54 +0100
