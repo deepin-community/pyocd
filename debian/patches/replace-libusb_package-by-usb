@@ -1,0 +1,114 @@
+Description: Replace libusb_package by usb
+ libusb_pacakge is a blob distribution of usb for Python and thus unsuitable for Debian. Replace its usage with plain
+ usb.
+Author: Jakob Haufe <sur5r@debian.org>
+Bug-Debian: https://bugs.debian.org/1062953
+Forwarded: no
+Last-Update: 2024-03-20
+
+Index: pyocd/pyocd/probe/picoprobe.py
+===================================================================
+--- pyocd.orig/pyocd/probe/picoprobe.py
++++ pyocd/pyocd/probe/picoprobe.py
+@@ -19,7 +19,7 @@ from array import array
+
+ from time import sleep
+ from usb import core, util
+-import libusb_package
++import usb
+
+ import platform
+ import errno
+@@ -108,7 +108,7 @@ class PicoLink(object):
+         """@brief Find and return all Picoprobes """
+         try:
+             # Use a custom matcher to make sure the probe is a Picoprobe and accessible.
+-            return [PicoLink(probe) for probe in libusb_package.find(find_all=True, custom_match=FindPicoprobe(uid))]
++            return [PicoLink(probe) for probe in usb.core.find(find_all=True, custom_match=FindPicoprobe(uid))]
+         except core.NoBackendError:
+             show_no_libusb_warning()
+             return []
+Index: pyocd/pyocd/probe/pydapaccess/interface/pyusb_backend.py
+===================================================================
+--- pyocd.orig/pyocd/probe/pydapaccess/interface/pyusb_backend.py
++++ pyocd/pyocd/probe/pydapaccess/interface/pyusb_backend.py
+@@ -41,7 +41,7 @@ TRACE = LOG.getChild("trace")
+ TRACE.setLevel(logging.CRITICAL)
+
+ try:
+-    import libusb_package
++    import usb
+     import usb.core
+     import usb.util
+ except ImportError:
+@@ -81,7 +81,7 @@ class PyUSB(Interface):
+         assert self.closed is True
+
+         # Get device handle
+-        dev = libusb_package.find(custom_match=FindDap(self.serial_number))
++        dev = usb.core.find(custom_match=FindDap(self.serial_number))
+         if dev is None:
+             raise DAPAccessIntf.DeviceError(f"Probe {self.serial_number} not found")
+
+@@ -180,7 +180,7 @@ class PyUSB(Interface):
+         """
+         # find all cmsis-dap devices
+         try:
+-            all_devices = libusb_package.find(find_all=True, custom_match=FindDap())
++            all_devices = usb.core.find(find_all=True, custom_match=FindDap())
+         except usb.core.NoBackendError:
+             if not PyUSB.did_show_no_libusb_warning:
+                 LOG.warning("CMSIS-DAPv1 probes may not be detected because no libusb library was found.")
+Index: pyocd/pyocd/probe/pydapaccess/interface/pyusb_v2_backend.py
+===================================================================
+--- pyocd.orig/pyocd/probe/pydapaccess/interface/pyusb_v2_backend.py
++++ pyocd/pyocd/probe/pydapaccess/interface/pyusb_v2_backend.py
+@@ -40,7 +40,7 @@ TRACE = LOG.getChild("trace")
+ TRACE.setLevel(logging.CRITICAL)
+
+ try:
+-    import libusb_package
++    import usb
+     import usb.core
+     import usb.util
+ except ImportError:
+@@ -95,7 +95,7 @@ class PyUSBv2(Interface):
+         assert self.closed is True
+
+         # Get device handle
+-        dev = libusb_package.find(custom_match=HasCmsisDapv2Interface(self.serial_number))
++        dev = usb.core.find(custom_match=HasCmsisDapv2Interface(self.serial_number))
+         if dev is None:
+             raise DAPAccessIntf.DeviceError(f"Probe {self.serial_number} not found")
+
+@@ -204,7 +204,7 @@ class PyUSBv2(Interface):
+         """@brief Returns all the connected devices with a CMSIS-DAPv2 interface."""
+         # find all cmsis-dap devices
+         try:
+-            all_devices = libusb_package.find(find_all=True, custom_match=HasCmsisDapv2Interface())
++            all_devices = usb.core.find(find_all=True, custom_match=HasCmsisDapv2Interface())
+         except usb.core.NoBackendError:
+             common.show_no_libusb_warning()
+             return []
+Index: pyocd/pyocd/probe/stlink/usb.py
+===================================================================
+--- pyocd.orig/pyocd/probe/stlink/usb.py
++++ pyocd/pyocd/probe/stlink/usb.py
+@@ -15,7 +15,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+
+-import libusb_package
++import usb
+ import usb.core
+ import usb.util
+ import logging
+@@ -101,7 +101,7 @@ class STLinkUSBInterface:
+     @classmethod
+     def get_all_connected_devices(cls):
+         try:
+-            devices = libusb_package.find(find_all=True, custom_match=cls._usb_match)
++            devices = usb.core.find(find_all=True, custom_match=cls._usb_match)
+         except usb.core.NoBackendError:
+             common.show_no_libusb_warning()
+             return []
