@@ -20,7 +20,7 @@ override_dh_auto_build:
 
 override_dh_auto_install:
 	python3 setup.py install --root=$(CURDIR)/debian/python3-pyocd/ --install-layout=deb
-	echo "version = '0.13.1'" > $(CURDIR)/debian/python3-pyocd/usr/lib/python3/dist-packages/pyocd/_version.py
+	echo "version = '0.36.0'" > $(CURDIR)/debian/python3-pyocd/usr/lib/python3/dist-packages/pyocd/_version.py
 	dh_installman -ppython3-pyocd debian/pyocd-gdbserver.1
 	dh_installman -ppython3-pyocd debian/pyocd-tool.1
 	dh_installman -ppython3-pyocd debian/pyocd-flashtool.1

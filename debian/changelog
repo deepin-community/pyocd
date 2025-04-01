@@ -1,3 +1,9 @@
+pyocd (0.36.0-2.1deepin1) unstable; urgency=medium
+
+  * fix version show error
+
+ -- lhdjply <lhdjply@126.com>  Tue, 01 Apr 2025 08:50:25 +0800
+
 pyocd (0.36.0-2.1) unstable; urgency=medium
 
   * Non-maintainer upload.
